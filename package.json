@@ -1,0 +1,26 @@
+{
+  "name": "kissanime-api",
+  "version": "1.0.0",
+  "description": "Provides a REST client interface to kissanime for development purposes.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zachw000/kissanimeapi.git"
+  },
+  "keywords": [
+    "Kissanime",
+    "API",
+    "REST",
+    "development",
+    "opensource"
+  ],
+  "author": "Zachary Waldron",
+  "license": "BSD-3-Clause",
+  "bugs": {
+    "url": "https://github.com/zachw000/kissanimeapi/issues"
+  },
+  "homepage": "https://github.com/zachw000/kissanimeapi#readme"
+}
