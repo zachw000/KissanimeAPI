@@ -43,19 +43,11 @@ kissanimeEvent.on("connect", function(useragent) {
         jar: module.exports.jar
     }, function(error, response, body) {
         // Verify User-Agent string
-        console.log(module.exports.useragent);
         var $ = cheerio.load(body);
-        var t, a, eval_str_1 = $('html head').children()[1].children[0].data.split("\n")[8].substr(8, $('html head').children()[1].children[0].data.split("\n")[8].length);
-        var eval_str_2 = $('html head').children()[1].children[0].data.split("\n")[15].substr(8, $('html head').children()[1].children[0].data.split("\n")[15].length);
-        eval(eval_str_1);
-        //console.log(eval_str_1);
-        var l = (eval_str_1.split(" ")[eval_str_1.split(" ").length - 1]);
-        eval(`var ${l.split("=")[0]}=${l.split("=")[1]}; console.log("Called!");`);
-        eval(`console.log(${l.split("=")[0]});`);
-        t = "kissanime.to";
-        a = { value: null };
-        //eval(eval_str_2);
-        //eval($('html head').children()[1].children[0].data.split("\n")[15]);
 
+        var jschl_answer, eval_str_1 = $('html head').children()[1].children[0].data.split("\n")[8].substr(8, $('html head').children()[1].children[0].data.split("\n")[8].length),
+            eval_str_2 = $('html head').children()[1].children[0].data.split("\n")[15].substr(8, $('html head').children()[1].children[0].data.split("\n")[15].length);
+        eval(`${eval_str_1} t = 'kissanime.to'; a = { value: null }; ${eval_str_2}; jschl_answer = a.value;`);
+        console.log(jschl_answer);
     });
 });

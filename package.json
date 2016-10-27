@@ -22,5 +22,9 @@
   "bugs": {
     "url": "https://github.com/zachw000/kissanimeapi/issues"
   },
-  "homepage": "https://github.com/zachw000/kissanimeapi#readme"
+  "homepage": "https://github.com/zachw000/kissanimeapi#readme",
+  "dependencies": {
+    "cheerio": "^0.22.0",
+    "requests": "^0.1.7"
+  }
 }
