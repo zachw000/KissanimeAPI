@@ -42,3 +42,4 @@ Thumbs.db
 # NPM generated directories #
 #############################
 node_modules
+out
