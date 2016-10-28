@@ -25,6 +25,7 @@
   "homepage": "https://github.com/zachw000/kissanimeapi#readme",
   "dependencies": {
     "cheerio": "^0.22.0",
+    "request": "^2.76.0",
     "requests": "^0.1.7"
   }
 }
