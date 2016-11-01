@@ -26,6 +26,7 @@
   "dependencies": {
     "cheerio": "^0.22.0",
     "request": "^2.76.0",
-    "requests": "^0.1.7"
+    "requests": "^0.1.7",
+    "xml2json": "^0.10.0"
   }
 }

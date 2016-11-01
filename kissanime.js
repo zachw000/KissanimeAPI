@@ -1,6 +1,7 @@
 "use strict";
 var request = require('request'),
-    cheerio = require('cheerio');
+    cheerio = require('cheerio'),
+    parser = require('xml2json');
 const EventEmitter = require('events');
 /** @module connection/cookie */
 
@@ -23,6 +24,8 @@ module.exports = {
          */
         this.useragent = userAgent !== null ? userAgent : this.useragent;
         this.kissanimeEvent.emit("connectChallenge", this.useragent);
+
+        return this.jar;
     },
 
     /**
@@ -41,7 +44,40 @@ module.exports = {
         }, function (error, response, body) {
             console.log(body);
         });
-    }
+    },
+
+    /**
+     * Performs a search on kissanime.to
+     * @desc Calls kissanime.to/Search/SearchSuggest(x)
+     * @param {String} keyword - Search Keyword
+     * @return {Array} animes - The results of the search
+     */
+     search: function (keyword) {
+       // Kissanime denies all search requests with keywords shorter than 2 characters
+       return new Promise((resolve, reject) => {
+         if (keyword.length < 2) return reject(new Error("keyword too short"));
+       request({
+         uri: "http://kissanime.to/Search/SearchSuggestx",
+         method: "POST",
+         followRedirect: true,
+         maxRedirects: 10,
+         headers: {
+           'User-Agent': module.exports.useragent,
+           'Content-Type': "application/x-www-form-urlencoded; charset=UTF-8",
+           'Origin': "http://kissanime.to",
+           'Referer': "http://kissanime.to/",
+           'X-Requested-With': 'XMLHttpRequest'
+         },
+         body: `type=Anime&keyword=${keyword}`,
+         jar: module.exports.jar
+       }, function (error, response, body) {
+         if (error) return reject(error);
+         var xml = `<root>${body}</root>`;
+         xml = parser.toJson(xml, {object: true});
+         return resolve(xml.root.a); // Returns the object
+       });
+     });
+     }
 };
 
 /**
