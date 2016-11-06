@@ -16,7 +16,7 @@ kissanime.kissanimeEvent.on('connected', () => {
       // the format is <var_name>[place_in_list]
       // .title for the show title or .uri for href link
       console.log(
-        `\t${animes[anime].title}\t\t\t\t\t${animes[anime].uri}`);
+        `\t${animes[anime].title} ${animes[anime].uri}`);
     }
   });
 });
