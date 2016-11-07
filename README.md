@@ -107,3 +107,6 @@ Currently there are not many features, just connection and search,
 however many more are planned. Stay up to date with the indev branch if
 your development needs requires more features.
 
+## Special Note To Developers
+For the latest features and extensions to the API, please take a look
+at the indev branch!
