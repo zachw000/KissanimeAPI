@@ -7,6 +7,11 @@ const EventEmitter = require('events');
 
 class KissanimeEvent extends EventEmitter {}
 
+function ValidURL(s) {
+   var regexp = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
+   return regexp.test(s);
+}
+
 module.exports = {
     useragent: "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/28.0.1500.52 Safari/537.36",
     jar: request.jar(),
@@ -94,7 +99,44 @@ module.exports = {
                 }
             });
         });
-    }
+    },
+
+    /**
+     * Displays a list of available episodes
+     * @description Takes a uri for the homepage of an anime, and displays any episodes available.
+     * @param {String} uri
+     */
+     getEpisodes: function (url) {
+       return new Promise((resolve, reject) => {
+          if (!ValidURL(url)) return reject(new Error("Invalid URL"));
+          request({
+            uri: url,
+            method: "GET",
+            followRedirects: true,
+            maxRedirects: 10,
+            headers: {
+              'User-Agent': module.exports.useragent
+            },
+            jar: module.exports.jar
+          }, function(error, response, body) {
+            if (error) return reject(new Error("Connection Rejected"));
+            try {
+            var $ = cheerio.load(body);
+
+            // Gets the table with episode listings
+            var listing_t = $('table.listing').children();
+            /**
+             * TODO Get episode listings in a usable format. (convert to xml, then to JSON?)
+             */
+            // var listings = [];
+
+            return resolve(listing_t);
+          } catch (err) {
+            return reject(new Error("Connection Failed"));
+          }
+          });
+       });
+     }
 };
 /**
  * Connect to kissanime and grab auth data.
