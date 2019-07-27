@@ -153,7 +153,7 @@ request({
     jar: module.exports.jar
 }, function(error, response, body) {
     if (error !== null) {
-        console.log("Well then, that was the good part ;-;");
+        console.log("FUCK, that was the good part ;-;");
     } else {
         module.exports.kissanimeEvent.emit("connected");
     }
