@@ -33,7 +33,7 @@ module.exports = {
      */
     test: () => {
         request({
-            uri: "https://kissanime.to",
+            uri: "https://kissanime.asia",
             method: "GET",
             followRedirect: true,
             maxRedirects: 10,
